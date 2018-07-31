@@ -24,15 +24,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required',
-            'password' => 'required'
+            'email' => 'bail|required|email|max:128',
+            'password' => 'bail|required|max:64'
         ];
     }
     public function messages()
     {
         return [
-            'username.required' => 'Vui lòng nhập Username',
-            'password.required'  => 'Vui lòng nhập Password',
+            'email.required' => 'Vui lòng nhập Email!',
+            'email.email' =>"Email không đúng định dạng!",
+            'email.max' =>'Email tối đa 128 kí tự!',
+            'password.required'  => 'Vui lòng nhập Password!',
+            'password.max' =>'Password tối đa 128 kí tự!'
         ];
     }
 }

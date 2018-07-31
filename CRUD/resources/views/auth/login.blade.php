@@ -10,16 +10,17 @@
 </head>
 <body>
 @include('block.error')
-<form action="" method="post">
+<form action="http://localhost:8000/login" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" >
+        <input type="text" placeholder="Enter Username" name="email">
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" >
+        <input type="password" placeholder="Enter Password" name="password">
 
         <button type="submit">Login</button>
+        <a href="redirect/facebook">FB Login</a>
         <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>

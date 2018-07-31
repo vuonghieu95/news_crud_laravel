@@ -9,8 +9,7 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 </head>
 <body>
-<h1>abc</h1>
-<p>Xin Chào: {!! Auth::user()->username !!}</p>
+<h1>Admin</h1>
 <a href="{!! url('logout') !!}"><button>Logout</button></a>
 </body>
 </html>
