@@ -41,7 +41,7 @@ class LoginController extends Controller
     }
 
     public function getLogout(){
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('getLogin');
     }
 }
