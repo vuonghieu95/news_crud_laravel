@@ -22,5 +22,12 @@ class AdminTableSeeder extends Seeder
                 ]
             ]
         );
+        DB::table('admin')->insert([
+            'username' => 'superadmin',
+            'password' => bcrypt('admin123'),
+            'email' => 'superadmin@gmail.com',
+            'role_type' => 2,
+            'ins_id' => 1,
+        ]);
     }
 }

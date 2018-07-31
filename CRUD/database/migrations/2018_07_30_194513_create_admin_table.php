@@ -25,6 +25,7 @@ class CreateAdminTable extends Migration
             $table->timestamp('ins_datetime');
             $table->timestamp('upd_datetime')->nullable();
             $table->string('del_flag', 1)->default(0);
+            $table->rememberToken();
         });
     }
 

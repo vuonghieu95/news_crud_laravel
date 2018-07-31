@@ -1,6 +1,9 @@
 /* Bordered form */
 form {
+    margin: 0 auto;
     border: 3px solid #f1f1f1;
+    max-width: 400px;
+
 }
 
 /* Full-width inputs */
@@ -21,7 +24,7 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+
 }
 
 /* Add a hover effect for buttons */
@@ -72,4 +75,7 @@ span.psw {
 .error_msg li{
     list-style: none;
     color: red;
+}
+.form_login {
+    margin: 0 auto;
 }
