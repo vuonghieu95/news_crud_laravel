@@ -21,7 +21,7 @@
         @if($currentlogin->role_type == config('config.admin.role_type'))
             <h1><?php config('config.admin.alias')?></h1>
         @elseif($currentlogin->role_type == config('config.superadmin.role_type'))
-            <h1>{{ config('config.superadmin.alias') }} </h1>
+                <a href="{{ route('superadmin') }}"> <h1>{{ config('config.superadmin.alias') }} </h1></a>
         @endif
         <a href="{{ route('superadmin.create') }}">
             <button class="btn-primary btn-create"> CREATE</button>
@@ -32,7 +32,16 @@
                 <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
             @endif
         @endforeach
-        <table class="table-bordered">
+        <form role="search" action="{{ route('superadmin') }}" style="float: right;" method="get">
+            <input type="text" value="" name="key" placeholder="Search...">
+
+            <button type="submit" id="searchsubmit"
+                    style="border: 1px solid;background: #007bff;color:white;" name="button"
+                    class="search">search
+            </button>
+
+        </form>
+        <table class="tbl table-bordered">
             <tr>
                 <th style="background: #007bff;color: white">Avatar</th>
                 <th style="background: #007bff;color: white">UserName</th>
@@ -40,10 +49,12 @@
                 <th style="background: #007bff;color: white">Action</th>
 
             </tr>
-            <?php foreach ($superadmins as $superadmin) { ?>
             <tr>
+                <?php foreach ($superadmins as $superadmin) { ?>
                 <td>
-                    {{ $superadmin->avatar }}
+                    <img src="{{ asset($superadmin->avatar ? $superadmin->avatar : '/img/default-user.png') }}"
+                         alt="name img" width="30" height="30">
+
                 </td>
                 <td>
                     {{ $superadmin->username }}
@@ -60,7 +71,7 @@
                           onsubmit="return confirm('Are you sure to delete the user?');">
                         <input type="hidden" name="_method" value="DELETE">
                         {{ csrf_field() }}
-                        @if($superadmin->id != Auth::user()->id)
+                        @if($superadmin->id != getCurrentUser()->id)
                             <button type="hidden" class="btn btn-danger">Delete</button>
                         @endif
                     </form>
@@ -68,9 +79,10 @@
 
             </tr>
             <?php }?>
-
+            @if($superadmins->count()>=5)
+                <form> {{ $superadmins->links() }}</form>
+            @endif
         </table>
-
 
         <a href="{{ route('getLogout') }}">
             <button class="btn-primary btn-logout">Logout</button>
