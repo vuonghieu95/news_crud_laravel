@@ -9,5 +9,5 @@ return [
         'role_type' => 2,
         'alias' => 'SuperAdmin'
     ],
-
+    'paginateAdmin' => 5
 ];

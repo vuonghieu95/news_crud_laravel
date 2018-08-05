@@ -5,13 +5,16 @@ Route::post('admin/login', ['as' => 'postLogin', 'uses' => 'Code\Auth\LoginContr
 
 
 Route::group(['prefix' => 'superadmin', 'middleware' => 'isAdmin'], function () {
-    Route::get('superadmin', ['as' => 'superadmin', 'uses' => 'SuperAdminController@index']);
-    Route::get('create', ['as' => 'superadmin.create', 'uses' => 'SuperAdminController@create']);
-    Route::post('store', ['as' => 'superadmin.store', 'uses' => 'SuperAdminController@store']);
-    Route::delete('destroy/{id}', ['as' => 'superadmin.destroy', 'uses' => 'SuperAdminController@destroy']);
-    Route::get('edit/{id}', ['as' => 'superadmin.edit', 'uses' => 'SuperAdminController@edit']);
-    Route::post('update/{id}', ['as' => 'superadmin.update', 'uses' => 'SuperAdminController@update']);
-    Route::get('search', ['as' => 'superadmin.search', 'uses' => 'SuperAdminController@search']);
+//    Route::get('superadmin', ['as' => 'superadmin', 'uses' => 'SuperAdminController@index']);
+//    Route::get('create', ['as' => 'superadmin.create', 'uses' => 'SuperAdminController@create']);
+//    Route::post('store', ['as' => 'superadmin.store', 'uses' => 'SuperAdminController@store']);
+//    Route::delete('destroy/{id}', ['as' => 'superadmin.destroy', 'uses' => 'SuperAdminController@destroy']);
+//    Route::get('edit/{id}', ['as' => 'superadmin.edit', 'uses' => 'SuperAdminController@edit']);
+//    Route::post('update/{id}', ['as' => 'superadmin.update', 'uses' => 'SuperAdminController@update']);
+//    Route::get('search', ['as' => 'superadmin.search', 'uses' => 'SuperAdminController@search']);
+
+ Route::resource('superadmin', 'SuperAdminController');
+
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('admin', ['as' => 'admin', function () {

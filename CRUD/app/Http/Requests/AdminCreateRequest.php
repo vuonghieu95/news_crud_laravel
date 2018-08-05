@@ -1,7 +1,6 @@
-<?
+<?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
@@ -16,19 +15,16 @@ class AdminCreateRequest extends FormRequest
 
     public function authorize()
     {
-
         return true;
     }
 
     public function rules(Request $request)
     {
-
         $rules = [
             'avatar' => 'required',
             'username' => 'bail|required',
             'email' => 'bail|required|email|max:128',
         ];
-
         if (!$request->id) {
             $rules += [
                 'password' => 'bail|required|confirmed|max:64',

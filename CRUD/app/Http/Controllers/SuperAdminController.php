@@ -11,15 +11,11 @@ class SuperAdminController extends Controller
 {
     public function index(Request $request)
     {
+        $superadmins = Admin::paginate(config('config.paginateAdmin'));
         if ($request->key) {
             $superadmins = Admin::WHERE('username', 'LIKE', '%' . $request->key . '%')->get();
-            return view('auth.admin',compact('superadmins'));
-        } else {
-            $viewDatas = [
-                'superadmins' => Admin::paginate(5)
-            ];
-            return view('auth.admin')->with($viewDatas);
         }
+        return view('auth.admin', compact('superadmins'));
     }
 
     public function create()
@@ -29,6 +25,7 @@ class SuperAdminController extends Controller
 
     public function store(AdminCreateRequest $request)
     {
+
         $admin = new Admin();
         if ($request->has('avatar')) {
             $file = $request->file('avatar');
@@ -44,13 +41,13 @@ class SuperAdminController extends Controller
         $admin->ins_id = Auth::user()->id;
         $admin->save();
         $request->session()->flash('success', 'Record successfully added!');
-        return redirect()->route('superadmin');
+        return redirect()->route('superadmin.index');
     }
 
     public function destroy($id)
     {
         Admin::where('id', $id)->delete();
-        return redirect()->route('superadmin')->with(['delete' => 'User deleted successfully']);
+        return redirect()->route('superadmin.index')->with(['delete' => 'User deleted successfully']);
     }
 
     public function edit($id)
@@ -77,8 +74,6 @@ class SuperAdminController extends Controller
         $superadmin->password = bcrypt($request->password);
         $superadmin->ins_id = Auth::user()->id;
         $superadmin->save();
-//        $superadmin->update($request->all());
         return redirect()->route('superadmin')->with('update', 'User updated successfully');
     }
-
 }

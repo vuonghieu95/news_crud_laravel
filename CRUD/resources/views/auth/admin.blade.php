@@ -15,13 +15,12 @@
 <body>
 <div class="container">
     <div class="row">
-
         <?php $currentlogin = Auth::user(); ?>
 
         @if($currentlogin->role_type == config('config.admin.role_type'))
             <h1><?php config('config.admin.alias')?></h1>
         @elseif($currentlogin->role_type == config('config.superadmin.role_type'))
-                <a href="{{ route('superadmin') }}"> <h1>{{ config('config.superadmin.alias') }} </h1></a>
+            <a href="{{ route('superadmin.index') }}"><h1>{{ config('config.superadmin.alias') }} </h1></a>
         @endif
         <a href="{{ route('superadmin.create') }}">
             <button class="btn-primary btn-create"> CREATE</button>
@@ -32,7 +31,7 @@
                 <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
             @endif
         @endforeach
-        <form role="search" action="{{ route('superadmin') }}" style="float: right;" method="get">
+        <form role="search" action="{{ route('superadmin.index') }}" style="float: right;" method="get">
             <input type="text" value="" name="key" placeholder="Search...">
 
             <button type="submit" id="searchsubmit"
@@ -54,7 +53,6 @@
                 <td>
                     <img src="{{ asset($superadmin->avatar ? $superadmin->avatar : '/img/default-user.png') }}"
                          alt="name img" width="30" height="30">
-
                 </td>
                 <td>
                     {{ $superadmin->username }}
@@ -76,7 +74,6 @@
                         @endif
                     </form>
                 </td>
-
             </tr>
             <?php }?>
             @if($superadmins->count()>=5)

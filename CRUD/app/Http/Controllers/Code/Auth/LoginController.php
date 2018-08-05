@@ -37,7 +37,7 @@ class LoginController extends Controller
                 return redirect()->route('admin');
             }
             if ($currentlogin->role_type == config('config.superadmin.role_type')) {
-                return redirect()->route('superadmin');
+                return redirect()->route('superadmin.index');
             }
         } else {
             return redirect()->back();
